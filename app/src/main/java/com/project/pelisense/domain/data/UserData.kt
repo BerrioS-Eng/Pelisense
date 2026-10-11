@@ -1,4 +1,4 @@
-package com.project.pelisense.data
+package com.project.pelisense.domain.data
 
 import java.time.LocalDateTime
 
@@ -9,7 +9,7 @@ data class UserData(
     val provider: String = "google.com",
     val isVerified: Boolean = true,
     val isAnonymous: Boolean = false,
-    val accountCreated: LocalDateTime,
-    val lastSignIn: LocalDateTime,
+    val accountCreated: LocalDateTime?,
+    val lastSignIn: LocalDateTime?,
     val profilePictureUrl: String? = null
 )

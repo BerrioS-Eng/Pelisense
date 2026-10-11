@@ -29,10 +29,12 @@ import com.project.pelisense.ui.theme.TechFontFamily
 import com.project.pelisense.ui.theme.cyberCardShape
 
 import androidx.compose.foundation.layout.systemBarsPadding
+import com.project.pelisense.ui.ui_states.SignInState
 
 @Composable
 fun WelcomeScreen(
-    onContinueClick: () -> Unit
+    onContinueClick: () -> Unit,
+    state: SignInState
 ) {
     Box(
         modifier = Modifier

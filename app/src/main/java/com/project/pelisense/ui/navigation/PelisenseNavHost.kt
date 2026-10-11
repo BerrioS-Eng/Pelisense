@@ -1,13 +1,16 @@
 package com.project.pelisense.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.project.pelisense.data.SampleData
+import com.project.pelisense.domain.data.SampleData
 import com.project.pelisense.ui.components.CyberTab
 import com.project.pelisense.ui.screens.HomeScreen
 import com.project.pelisense.ui.screens.MovieDetailsScreen
@@ -15,7 +18,7 @@ import com.project.pelisense.ui.screens.MyListScreen
 import com.project.pelisense.ui.screens.ProfileScreen
 import com.project.pelisense.ui.screens.QuestionnaireScreen
 import com.project.pelisense.ui.screens.SplashScreen
-import com.project.pelisense.ui.screens.WelcomeScreen
+import com.project.pelisense.ui.view_models.SingInViewModel
 
 object PelisenseRoutes {
     const val SPLASH = "splash"
@@ -31,7 +34,7 @@ object PelisenseRoutes {
 
 @Composable
 fun PelisenseNavHost(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ) {
     NavHost(
         navController = navController,
@@ -50,11 +53,10 @@ fun PelisenseNavHost(
 
         // WELCOME / LOGIN SCREEN
         composable(PelisenseRoutes.WELCOME) {
-            WelcomeScreen(
-                onContinueClick = {
-                    navController.navigate(PelisenseRoutes.QUESTIONNAIRE)
-                }
-            )
+            val viewModel = viewModel<SingInViewModel>()
+            val state by viewModel.state.collectAsStateWithLifecycle()
+
+
         }
 
         // QUESTIONNAIRE SCREEN

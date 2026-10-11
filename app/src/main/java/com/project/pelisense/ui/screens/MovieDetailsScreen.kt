@@ -39,7 +39,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.pelisense.data.Movie
+import com.project.pelisense.domain.data.Movie
 import com.project.pelisense.ui.components.CyberBadge
 import com.project.pelisense.ui.components.CyberButton
 import com.project.pelisense.ui.components.CyberGlassCard
