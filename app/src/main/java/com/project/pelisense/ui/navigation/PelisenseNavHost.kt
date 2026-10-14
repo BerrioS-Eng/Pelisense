@@ -21,17 +21,7 @@ import com.project.pelisense.ui.screens.SplashScreen
 import com.project.pelisense.ui.screens.WelcomeScreen
 import com.project.pelisense.ui.view_models.SignInViewModel
 
-object PelisenseRoutes {
-    const val SPLASH = "splash"
-    const val WELCOME = "welcome"
-    const val QUESTIONNAIRE = "questionnaire"
-    const val HOME = "home"
-    const val DETAILS = "details/{movieId}"
-    const val PROFILE = "profile"
-    const val MY_LIST = "my_list"
 
-    fun detailsRoute(movieId: String) = "details/$movieId"
-}
 
 @Composable
 fun PelisenseNavHost(
