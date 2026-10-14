@@ -14,18 +14,25 @@ import com.project.pelisense.R
 import com.project.pelisense.domain.AuthenticationPort
 import com.project.pelisense.domain.data.UserData
 import com.project.pelisense.domain.exceptions.AuthenticationException
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.tasks.await
 import java.time.Instant
 import java.time.LocalDateTime
 import java.util.TimeZone
 import kotlin.coroutines.cancellation.CancellationException
 
-class GoogleAuthClient(private val context: Context) : AuthenticationPort {
+class GoogleAuthClient(
+    private val context: Context,
+) : AuthenticationPort {
 
+    private val currentUser: MutableStateFlow<UserData?> = MutableStateFlow(null)
     private val auth = FirebaseAuth.getInstance()
     private val credentialManager = CredentialManager.create(context)
+
+    override suspend fun getCurrentUser(): UserData? {
+        return currentUser.value
+    }
 
 
     override suspend fun signIn(): UserData {
@@ -49,8 +56,8 @@ class GoogleAuthClient(private val context: Context) : AuthenticationPort {
                 val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
                 val firebaseUser = auth.signInWithCredential(firebaseCredential).await().user
                     ?: throw AuthenticationException("User is  null")
-
-                return buildUserDataFromFirebaseUser(firebaseUser)
+                this.currentUser.value = buildUserDataFromFirebaseUser(firebaseUser)
+                return this.currentUser.value!!
             }
             throw AuthenticationException("Unexpected credential type")
         } catch (e: Exception) {
@@ -82,6 +89,7 @@ class GoogleAuthClient(private val context: Context) : AuthenticationPort {
 
     override suspend fun signOut() {
         auth.signOut()
+        this.currentUser.value = null
         credentialManager.clearCredentialState(ClearCredentialStateRequest())
     }
 }

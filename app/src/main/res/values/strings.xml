@@ -3,4 +3,5 @@
     <string name="web_client_id">528958140566-tb4g27te04kn78o1l17s5f28m7mdv6tj.apps.googleusercontent.com</string>
     <string name="welcome_to_pelisense">WELCOME TO PELISENSE</string>
     <string name="continue_with_google">Continue with google</string>
+    <string name="not_active_session_error">Not active session please sign in again</string>
 </resources>
