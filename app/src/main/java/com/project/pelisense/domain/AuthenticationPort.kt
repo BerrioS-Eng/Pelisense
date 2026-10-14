@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthenticationPort {
 
-    suspend fun signIn(): Flow<UserData>
+    suspend fun signIn(): UserData
 
     suspend fun signOut()
 }

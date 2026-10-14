@@ -7,8 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import com.google.android.gms.auth.api.identity.Identity
 import com.project.pelisense.ui.navigation.PelisenseNavHost
 import com.project.pelisense.ui.theme.PelisenseTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
 

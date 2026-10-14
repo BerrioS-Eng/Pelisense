@@ -2,8 +2,8 @@ package com.project.pelisense.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -18,7 +18,8 @@ import com.project.pelisense.ui.screens.MyListScreen
 import com.project.pelisense.ui.screens.ProfileScreen
 import com.project.pelisense.ui.screens.QuestionnaireScreen
 import com.project.pelisense.ui.screens.SplashScreen
-import com.project.pelisense.ui.view_models.SingInViewModel
+import com.project.pelisense.ui.screens.WelcomeScreen
+import com.project.pelisense.ui.view_models.SignInViewModel
 
 object PelisenseRoutes {
     const val SPLASH = "splash"
@@ -53,10 +54,19 @@ fun PelisenseNavHost(
 
         // WELCOME / LOGIN SCREEN
         composable(PelisenseRoutes.WELCOME) {
-            val viewModel = viewModel<SingInViewModel>()
+            val viewModel = hiltViewModel<SignInViewModel>()
             val state by viewModel.state.collectAsStateWithLifecycle()
+            val navigateToQuestionnaire = {
+                    navController.navigate(PelisenseRoutes.QUESTIONNAIRE) {
+                        popUpTo(PelisenseRoutes.WELCOME) {
+                            inclusive = true
+                        }
+                    }
+                }
 
-
+            WelcomeScreen(state = state, onContinueClick = {
+                viewModel.signIn { navigateToQuestionnaire() }
+            })
         }
 
         // QUESTIONNAIRE SCREEN
@@ -85,7 +95,9 @@ fun PelisenseNavHost(
                 onTabSelected = { tab ->
                     when (tab) {
                         CyberTab.MOOD -> navController.navigate(PelisenseRoutes.QUESTIONNAIRE)
-                        CyberTab.EXPLORE -> { /* Already home */ }
+                        CyberTab.EXPLORE -> { /* Already home */
+                        }
+
                         CyberTab.HISTORY -> navController.navigate(PelisenseRoutes.MY_LIST)
                         CyberTab.PROFILE -> navController.navigate(PelisenseRoutes.PROFILE)
                     }
@@ -116,7 +128,8 @@ fun PelisenseNavHost(
                         CyberTab.MOOD -> navController.navigate(PelisenseRoutes.QUESTIONNAIRE)
                         CyberTab.EXPLORE -> navController.navigate(PelisenseRoutes.HOME)
                         CyberTab.HISTORY -> navController.navigate(PelisenseRoutes.MY_LIST)
-                        CyberTab.PROFILE -> { /* Already profile */ }
+                        CyberTab.PROFILE -> { /* Already profile */
+                        }
                     }
                 },
                 onSignOutClick = {
@@ -137,7 +150,9 @@ fun PelisenseNavHost(
                     when (tab) {
                         CyberTab.MOOD -> navController.navigate(PelisenseRoutes.QUESTIONNAIRE)
                         CyberTab.EXPLORE -> navController.navigate(PelisenseRoutes.HOME)
-                        CyberTab.HISTORY -> { /* Already my list */ }
+                        CyberTab.HISTORY -> { /* Already my list */
+                        }
+
                         CyberTab.PROFILE -> navController.navigate(PelisenseRoutes.PROFILE)
                     }
                 },

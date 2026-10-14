@@ -29,6 +29,11 @@ import com.project.pelisense.ui.theme.TechFontFamily
 import com.project.pelisense.ui.theme.cyberCardShape
 
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.project.pelisense.R
+import com.project.pelisense.ui.theme.PelisenseTheme
 import com.project.pelisense.ui.ui_states.SignInState
 
 @Composable
@@ -63,7 +68,7 @@ fun WelcomeScreen(
 
                 // Title BIENVENIDO A PELISENSE
                 Text(
-                    text = "BIENVENIDO A\nPELISENSE",
+                    text = stringResource(R.string.welcome_to_pelisense),
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontFamily = TechFontFamily,
                         fontWeight = FontWeight.Bold,
@@ -78,12 +83,63 @@ fun WelcomeScreen(
 
                 // Continuar con Google Button
                 CyberButton(
-                    text = "CONTINUAR CON GOOGLE",
+                    text = stringResource(R.string.continue_with_google),
                     onClick = onContinueClick,
                     icon = Icons.Default.AccountCircle,
                     modifier = Modifier.fillMaxWidth()
                 )
+                if (state.isLoading) {
+                    Spacer(modifier = Modifier.height(36.dp))
+                    CircularProgressIndicator()
+                }
+
+                state.signInError?.let {
+                    Spacer(modifier = Modifier.height(36.dp))
+                    Text(
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontFamily = TechFontFamily,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.error
+                        ),
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun WelcomeScreenPreview() {
+    PelisenseTheme {
+        WelcomeScreen(
+            onContinueClick = {},
+            state = SignInState()
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun WelcomeScreenLoadingPreview() {
+    PelisenseTheme {
+        WelcomeScreen(
+            onContinueClick = {},
+            state = SignInState(isLoading = true)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun WelcomeScreenErrorPreview() {
+    PelisenseTheme {
+        WelcomeScreen(
+            onContinueClick = {},
+            state = SignInState(signInError = "Couldn't sign in")
+        )
     }
 }

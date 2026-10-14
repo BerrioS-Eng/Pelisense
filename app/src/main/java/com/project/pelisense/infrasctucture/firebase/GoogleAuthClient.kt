@@ -28,7 +28,7 @@ class GoogleAuthClient(private val context: Context) : AuthenticationPort {
     private val credentialManager = CredentialManager.create(context)
 
 
-    override suspend fun signIn(): Flow<UserData> {
+    override suspend fun signIn(): UserData {
         try {
             val googleIdOption = GetGoogleIdOption.Builder()
                 .setFilterByAuthorizedAccounts(false)
@@ -50,7 +50,7 @@ class GoogleAuthClient(private val context: Context) : AuthenticationPort {
                 val firebaseUser = auth.signInWithCredential(firebaseCredential).await().user
                     ?: throw AuthenticationException("User is  null")
 
-                return flow { emit(buildUserDataFromFirebaseUser(firebaseUser)) }
+                return buildUserDataFromFirebaseUser(firebaseUser)
             }
             throw AuthenticationException("Unexpected credential type")
         } catch (e: Exception) {
