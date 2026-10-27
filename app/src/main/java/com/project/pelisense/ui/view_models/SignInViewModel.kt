@@ -3,10 +3,9 @@ package com.project.pelisense.ui.view_models
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.pelisense.domain.data.UserData
+import com.project.pelisense.global_states.UserDataStore
 import com.project.pelisense.ui.ui_states.SignInState
 import com.project.pelisense.usecases.auth.SignInUseCase
-import com.project.pelisense.usecases.auth.SignOutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +16,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
+    private val userStore: UserDataStore
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(SignInState())
@@ -36,6 +36,7 @@ class SignInViewModel @Inject constructor(
                         signInError = null
                     )
                 }
+                userStore.updateUserData(userData = user)
                 successCallback()
             } catch (e: Exception) {
                 _state.update {

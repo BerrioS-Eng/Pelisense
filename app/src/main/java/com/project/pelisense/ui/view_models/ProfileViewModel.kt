@@ -19,6 +19,10 @@ class ProfileViewModel @Inject constructor(
     private val _state = MutableStateFlow(ProfileUIState())
     val state = _state.asStateFlow()
 
+    init {
+        getProfileData()
+    }
+
 
     fun getProfileData() {
         _state.update { it.copy(isLoading = true) }

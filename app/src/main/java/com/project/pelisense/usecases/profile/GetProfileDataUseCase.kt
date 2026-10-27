@@ -5,16 +5,19 @@ import com.project.pelisense.R
 import com.project.pelisense.domain.AuthenticationPort
 import com.project.pelisense.domain.data.UserData
 import com.project.pelisense.domain.exceptions.AuthenticationException
+import com.project.pelisense.global_states.UserDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import jakarta.inject.Inject
 
 class GetProfileDataUseCase @Inject constructor(
-    private val authenticationManager: AuthenticationPort,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val userDataStore: UserDataStore
 ) {
 
-    suspend fun execute(): UserData {
-        authenticationManager.getCurrentUser()?.let { userData -> return userData }
+    fun execute(): UserData {
+        userDataStore.state.value?.let {
+            return it
+        }
         throw AuthenticationException(context.getString(R.string.not_active_session_error))
     }
 }
