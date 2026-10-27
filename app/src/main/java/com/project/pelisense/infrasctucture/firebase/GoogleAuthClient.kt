@@ -30,10 +30,7 @@ class GoogleAuthClient(
     private val auth = FirebaseAuth.getInstance()
     private val credentialManager = CredentialManager.create(context)
 
-    override suspend fun getCurrentUser(): UserData? {
-        return currentUser.value
-    }
-
+   
 
     override suspend fun signIn(): UserData {
         try {

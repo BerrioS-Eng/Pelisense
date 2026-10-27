@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 interface AuthenticationPort {
-    suspend fun getCurrentUser(): UserData?
     suspend fun signIn(): UserData
 
     suspend fun signOut()
