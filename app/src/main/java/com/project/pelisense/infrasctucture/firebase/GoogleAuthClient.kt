@@ -26,11 +26,9 @@ class GoogleAuthClient(
     private val context: Context,
 ) : AuthenticationPort {
 
-    private val currentUser: MutableStateFlow<UserData?> = MutableStateFlow(null)
     private val auth = FirebaseAuth.getInstance()
     private val credentialManager = CredentialManager.create(context)
 
-   
 
     override suspend fun signIn(): UserData {
         try {
@@ -53,8 +51,7 @@ class GoogleAuthClient(
                 val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
                 val firebaseUser = auth.signInWithCredential(firebaseCredential).await().user
                     ?: throw AuthenticationException("User is  null")
-                this.currentUser.value = buildUserDataFromFirebaseUser(firebaseUser)
-                return this.currentUser.value!!
+                return buildUserDataFromFirebaseUser(firebaseUser)
             }
             throw AuthenticationException("Unexpected credential type")
         } catch (e: Exception) {
@@ -86,7 +83,6 @@ class GoogleAuthClient(
 
     override suspend fun signOut() {
         auth.signOut()
-        this.currentUser.value = null
         credentialManager.clearCredentialState(ClearCredentialStateRequest())
     }
 }
