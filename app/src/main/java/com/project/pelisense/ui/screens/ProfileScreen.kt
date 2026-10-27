@@ -34,7 +34,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.pelisense.domain.data.SampleData
 import com.project.pelisense.ui.components.CyberBadge
 import com.project.pelisense.ui.components.CyberBottomBar
 import com.project.pelisense.ui.components.CyberButton
@@ -51,13 +50,15 @@ import com.project.pelisense.ui.theme.CyberOnSurfaceVariant
 import com.project.pelisense.ui.theme.CyberPrimary
 import com.project.pelisense.ui.theme.CyberPrimaryBright
 import com.project.pelisense.ui.theme.TechFontFamily
+import com.project.pelisense.ui.ui_states.ProfileUIState
 
 @Composable
 fun ProfileScreen(
     onTabSelected: (CyberTab) -> Unit,
-    onSignOutClick: () -> Unit
+    onSignOutClick: () -> Unit,
+    state: ProfileUIState
 ) {
-    val user = SampleData.sampleUser
+    val user = state.userData!!
 
     Scaffold(
         topBar = {
@@ -273,24 +274,6 @@ fun ProfileScreen(
                         LaserDivider()
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Column {
-                                Text(
-                                    text = "Account Type",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = CyberOnSurfaceVariant
-                                )
-                                Text(
-                                    text = user.accountType,
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = CyberOnSurface
-                                )
-                            }
-                        }
 
                         Spacer(modifier = Modifier.height(14.dp))
 
@@ -356,7 +339,7 @@ fun ProfileScreen(
                                 .padding(horizontal = 12.dp, vertical = 10.dp)
                         ) {
                             Text(
-                                text = user.accountCreated,
+                                text = user.accountCreated.toString(),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = CyberOnSurface
                             )
@@ -383,7 +366,7 @@ fun ProfileScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = user.lastSignIn,
+                                    text = user.lastSignIn.toString(),
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = CyberOnSurface
                                 )

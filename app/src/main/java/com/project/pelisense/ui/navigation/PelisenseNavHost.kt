@@ -19,8 +19,8 @@ import com.project.pelisense.ui.screens.ProfileScreen
 import com.project.pelisense.ui.screens.QuestionnaireScreen
 import com.project.pelisense.ui.screens.SplashScreen
 import com.project.pelisense.ui.screens.WelcomeScreen
+import com.project.pelisense.ui.view_models.ProfileViewModel
 import com.project.pelisense.ui.view_models.SignInViewModel
-
 
 
 @Composable
@@ -47,12 +47,12 @@ fun PelisenseNavHost(
             val viewModel = hiltViewModel<SignInViewModel>()
             val state by viewModel.state.collectAsStateWithLifecycle()
             val navigateToQuestionnaire = {
-                    navController.navigate(PelisenseRoutes.QUESTIONNAIRE) {
-                        popUpTo(PelisenseRoutes.WELCOME) {
-                            inclusive = true
-                        }
+                navController.navigate(PelisenseRoutes.QUESTIONNAIRE) {
+                    popUpTo(PelisenseRoutes.WELCOME) {
+                        inclusive = true
                     }
                 }
+            }
 
             WelcomeScreen(state = state, onContinueClick = {
                 viewModel.signIn { navigateToQuestionnaire() }
@@ -112,6 +112,8 @@ fun PelisenseNavHost(
 
         // PROFILE SCREEN
         composable(PelisenseRoutes.PROFILE) {
+            val viewModel: ProfileViewModel = hiltViewModel()
+            val state by viewModel.state.collectAsStateWithLifecycle()
             ProfileScreen(
                 onTabSelected = { tab ->
                     when (tab) {
@@ -126,7 +128,8 @@ fun PelisenseNavHost(
                     navController.navigate(PelisenseRoutes.WELCOME) {
                         popUpTo(0) { inclusive = true }
                     }
-                }
+                },
+                state = state
             )
         }
 
