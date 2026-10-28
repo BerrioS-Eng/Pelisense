@@ -125,6 +125,7 @@ fun PelisenseNavHost(
                     }
                 },
                 onSignOutClick = {
+                    viewModel.singOut()
                     navController.navigate(PelisenseRoutes.WELCOME) {
                         popUpTo(0) { inclusive = true }
                     }

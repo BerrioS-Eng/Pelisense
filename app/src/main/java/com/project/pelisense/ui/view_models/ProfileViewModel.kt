@@ -2,7 +2,9 @@ package com.project.pelisense.ui.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.project.pelisense.ui.ui_states.ProfileUIState
+import com.project.pelisense.usecases.auth.SignOutUseCase
 import com.project.pelisense.usecases.profile.GetProfileDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
@@ -13,7 +15,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val getProfileDataUseCase: GetProfileDataUseCase
+    private val getProfileDataUseCase: GetProfileDataUseCase,
+    private val singOutUseCase: SignOutUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ProfileUIState())
@@ -50,5 +53,8 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun singOut() {
+        viewModelScope.launch { singOutUseCase.execute() }
+    }
 
 }
