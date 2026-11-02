@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.collections.plus
 
-class QuaternariesViewModel : ViewModel() {
+class QuestionnaireViewModel : ViewModel() {
 
     private val _state = MutableStateFlow(QuestionerResponse())
     val state = _state.asStateFlow()

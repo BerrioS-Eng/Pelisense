@@ -20,6 +20,7 @@ import com.project.pelisense.ui.screens.QuestionnaireScreen
 import com.project.pelisense.ui.screens.SplashScreen
 import com.project.pelisense.ui.screens.WelcomeScreen
 import com.project.pelisense.ui.view_models.ProfileViewModel
+import com.project.pelisense.ui.view_models.QuestionnaireViewModel
 import com.project.pelisense.ui.view_models.SignInViewModel
 
 
@@ -61,6 +62,8 @@ fun PelisenseNavHost(
 
         // QUESTIONNAIRE SCREEN
         composable(PelisenseRoutes.QUESTIONNAIRE) {
+            val questionerViewModel: QuestionnaireViewModel = hiltViewModel()
+            val state by questionerViewModel.state.collectAsStateWithLifecycle()
             QuestionnaireScreen(
                 onGenerateClick = {
                     navController.navigate(PelisenseRoutes.HOME) {
@@ -69,7 +72,9 @@ fun PelisenseNavHost(
                 },
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
+                state = state,
+                onEvent = questionerViewModel::onQuestionnaireEvent,
             )
         }
 
