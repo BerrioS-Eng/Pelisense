@@ -1,4 +1,4 @@
-package com.project.pelisense.data
+package com.project.pelisense.domain.data
 
 data class CastMember(
     val name: String,

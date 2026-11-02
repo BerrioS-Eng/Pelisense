@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,8 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.project.pelisense.data.Movie
-import com.project.pelisense.data.SampleData
+import com.project.pelisense.domain.data.Movie
+import com.project.pelisense.domain.data.SampleData
 import com.project.pelisense.ui.components.CyberBadge
 import com.project.pelisense.ui.components.CyberBottomBar
 import com.project.pelisense.ui.components.CyberButton
@@ -50,9 +49,7 @@ import com.project.pelisense.ui.components.CyberTopBar
 import com.project.pelisense.ui.theme.ChamferedShape
 import com.project.pelisense.ui.theme.CyberBackground
 import com.project.pelisense.ui.theme.CyberGlassBorder
-import com.project.pelisense.ui.theme.CyberOnSurface
 import com.project.pelisense.ui.theme.CyberOnSurfaceVariant
-import com.project.pelisense.ui.theme.CyberOutlineVariant
 import com.project.pelisense.ui.theme.CyberPrimary
 import com.project.pelisense.ui.theme.CyberPrimaryBright
 import com.project.pelisense.ui.theme.TechFontFamily

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "528958140566",
+    "project_id": "pelisense-id-project",
+    "storage_bucket": "pelisense-id-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528958140566:android:7deee9e913b0a7e683d2b7",
+        "android_client_info": {
+          "package_name": "com.project.pelisense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528958140566-dn9jlhm3j8fk1kc1bcpvf5hm8aot0loc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.pelisense",
+            "certificate_hash": "de091cff65f01c0403e7f157dd670d14f5ba05f7"
+          }
+        },
+        {
+          "client_id": "528958140566-tb4g27te04kn78o1l17s5f28m7mdv6tj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkS6YoBVKR3FoGAPpnSarVZVRMZBhrgcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528958140566-tb4g27te04kn78o1l17s5f28m7mdv6tj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
