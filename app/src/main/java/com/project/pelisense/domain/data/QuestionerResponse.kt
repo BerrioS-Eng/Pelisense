@@ -1,18 +1,18 @@
 package com.project.pelisense.domain.data
 
-enum class Feelings {
-    HAPPY,
-    SAD,
-    STRESSED,
-    BORED,
-    ANXIOUS,
-    ANGRY,
-    NOSTALGIC,
-    ROMANTIC,
-    EXCITED,
-    RELAXED,
-    LONELY,
-    ENERGETIC
+enum class Feelings(val emoji: String) {
+    HAPPY("😊"),
+    SAD("☹️"),
+    STRESSED( "😵"),
+    BORED("😐"),
+    ANXIOUS("😟"),
+    ANGRY("😡"),
+    NOSTALGIC("⌛"),
+    ROMANTIC("💙"),
+    EXCITED("🎉"),
+    RELAXED("🧘"),
+    LONELY("👤"),
+    ENERGETIC("⚡")
 }
 
 enum class Tone {
